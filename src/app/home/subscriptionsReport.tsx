@@ -1,19 +1,23 @@
-import Image from "next/image";
+"use client";
 
-import { TextField } from "@mui/material";
+import Image from "next/image";
+import { MenuItem, Pagination, TextField } from "@mui/material";
 
 import SearchIcon from "@/assets/icons/search.svg";
 import CalendarIcon from "@/assets/icons/calendar.svg";
+import { DataGrid } from "@mui/x-data-grid";
+import { columns } from "./subscriptionsColumns";
+
 
 const SubscriptionsReport = () => {
   return (
     <div className="mt-40">
-      <div>
-        <h2 className="font-bold leading-[29.05px] text-2xl mb-8">
+      <div className="mb-8">
+        <h2 className="font-bold leading-[29.05px] text-2xl">
           Relatório de Assinaturas
         </h2>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-8">
           <div className="flex gap-[13px]">
             <div className="w-[447px] relative">
               <TextField
@@ -42,6 +46,80 @@ const SubscriptionsReport = () => {
           <button className="bg-main py-[11px] px-[14px] rounded text-white">
             Exportar
           </button>
+        </div>
+      </div>
+
+      <div>
+        <DataGrid
+          rows={[]}
+          columns={columns}
+          disableRowSelectionOnClick
+          disableColumnResize
+          disableColumnSorting
+          disableColumnMenu
+          hideFooter
+          sx={{
+            ".MuiDataGrid-columnHeaderTitleContainer": {
+              justifyContent: "center",
+            },
+            ".MuiDataGrid-row--borderBottom": {
+              background: "#F8F8F8 !important",
+            },
+            ".MuiDataGrid-columnSeparator": {
+              visibility: "hidden",
+            },
+            fontSize: 12,
+          }}
+        />
+        <div className="flex justify-between items-center mt-8">
+          <TextField
+            label="Quantidade de itens por página"
+            defaultValue="20"
+            select
+            className="w-[241px]"
+            sx={{
+              ".MuiSelect-select": {
+                padding: "12px 16px",
+                borderColor: "#CCCCCC",
+              },
+              ".MuiInputLabel-root": {
+                color: "#CCCCCC",
+              },
+            }}
+          >
+            <MenuItem value="20">20 de 40</MenuItem>
+          </TextField>
+
+          <Pagination
+            count={4}
+            variant="outlined"
+            shape="rounded"
+            sx={{
+              ".MuiPaginationItem-previousNext": {
+                border: "0",
+              },
+              ".Mui-selected.MuiPaginationItem-page, .Mui-selected.MuiPaginationItem-page:hover, .MuiPaginationItem-page:hover":
+                {
+                  fontSize: 16,
+                  background: "#00B9B5BF",
+                  color: "white",
+                },
+              ".MuiPaginationItem-page": {
+                alignItems: "center",
+                fontSize: 16,
+                borderColor: "#00B9B5BF",
+                color: "#00B9B5BF",
+                width: 39,
+                height: 42,
+                borderRadius: "8px",
+                padding: "16px",
+              },
+              ".MuiPaginationItem-icon": {
+                fill: "#00B9B5BF",
+              },
+              fontFamily: "inherit !important",
+            }}
+          />
         </div>
       </div>
     </div>
