@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+
 import { Navbar } from "@/components/navbar";
+
+import "./globals.css";
+import ReactQueryProvider from "@/utils/queryClientProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,10 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased relative`}>
-        <header className="sticky top-0 z-50">
-          <Navbar />
-        </header>
-        <main>{children}</main>
+        <AppRouterCacheProvider>
+          <header className="sticky top-0 z-50">
+            <Navbar />
+          </header>
+          <ReactQueryProvider>
+            <main>{children}</main>
+          </ReactQueryProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
