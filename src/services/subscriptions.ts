@@ -1,3 +1,4 @@
+import { ApiResponse } from "@/types/apiResponse";
 import api from "./api";
 
 export interface LegalPerson {
@@ -6,7 +7,7 @@ export interface LegalPerson {
   email: string;
 }
 
-interface SubscriptionContent {
+export interface SubscriptionContent {
   is_bag: boolean;
   id: string;
   subscriber_id: string;
@@ -21,6 +22,6 @@ interface SubscriptionContent {
 }
 
 export const getSubscriptions = async () => {
-  const response = await api.get<SubscriptionContent>("/subscription");
+  const response = await api.get<ApiResponse<SubscriptionContent>>("/subscription");
   return response.data;
 };
