@@ -1,11 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import { MenuItem, Pagination, TextField } from "@mui/material";
 
 import SearchIcon from "@/assets/icons/search.svg";
 import CalendarIcon from "@/assets/icons/calendar.svg";
 import { SubscriptionTable } from "./subscriptionTable";
+import { SubscriptionContent } from "@/services/subscriptions";
 
-const SubscriptionsReport = () => {
+interface SubscriptionsReportProps {
+  data: SubscriptionContent[];
+}
+
+const SubscriptionsReport = ({ data }: SubscriptionsReportProps) => {
   return (
     <div className="mt-40">
       <div className="mb-8">
@@ -46,8 +53,7 @@ const SubscriptionsReport = () => {
       </div>
 
       <div>
-
-        <SubscriptionTable data={[]} />
+        <SubscriptionTable data={data} />
 
         <div className="flex justify-between items-center mt-8">
           <TextField
