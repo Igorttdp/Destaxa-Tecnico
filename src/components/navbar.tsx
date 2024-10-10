@@ -17,7 +17,7 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="w-full h-24 shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-between pl-[30px] pr-8">
+    <nav className="w-full h-24 shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-between pl-[30px] pr-8 bg-white">
       <div className="flex gap-[137px] items-center">
         <h1>
           <Image width={100} height={29.1} src={Logo} alt="Logo" />
