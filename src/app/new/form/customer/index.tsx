@@ -8,14 +8,13 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
-
 import HelpCircleIcon from "@/assets/icons/help-circle.svg";
 
+import useNewSubscriptionProvider from "../../context/useNewSubscriptionProvider";
 import FormWarning from "../../components/formWarning";
-import { textFieldSx } from "@/utils";
+import { textFieldSx } from "@/utils/textFieldStyles";
 import Contact from "./contact";
 import Address from "./address";
-import useNewSubscriptionProvider from "../../context/useNewSubscriptionProvider";
 
 const CustomerForm = () => {
   const { nextStep } = useNewSubscriptionProvider();
@@ -32,11 +31,11 @@ const CustomerForm = () => {
       </div>
 
       <Accordion
-        className="mt-[23px] mb-6 bg-[#F8F8F8] shadow-none"
+        className="!mt-[23px] !mb-6 !bg-[#F8F8F8] !shadow-none"
         defaultExpanded
       >
         <AccordionSummary
-          className="border-[#00B9B5] border border-solid m-0 !h-[54px] !min-h-0 [&>*]:!m-0 rounded-t [&>div]:justify-between [&>div]:items-center"
+          className="!border-[#00B9B5] !border !border-solid m-0 !h-[54px] !min-h-0 [&>*]:!m-0 !rounded-t [&>div]:!justify-between [&>div]:!items-center"
           expandIcon={<Image src={ChevronDownIcon} alt="Seta" />}
           aria-controls="panel1-content"
           id="panel1-header"
@@ -45,7 +44,7 @@ const CustomerForm = () => {
 
           <FormWarning className="pr-6" />
         </AccordionSummary>
-        <AccordionDetails className="rounded-b px-4 pt-[23px]">
+        <AccordionDetails className="!rounded-b !px-4 !pt-[23px] !pb-[19px]">
           <h6 className="border-b text-[#CCCCCC] text-xs leading-[14.52px] mb-6">
             Contatos
           </h6>
@@ -69,11 +68,11 @@ const CustomerForm = () => {
       </Accordion>
 
       <Accordion
-        className="mt-[23px] mb-6 bg-[#F8F8F8] shadow-none"
+        className="!mt-[23px] !mb-6 !bg-[#F8F8F8] !shadow-none"
         defaultExpanded
       >
         <AccordionSummary
-          className="border-[#00B9B5] border border-solid m-0 !h-[54px] !min-h-0 [&>*]:!m-0 rounded-t [&>div]:justify-between [&>div]:items-center"
+          className="!border-[#00B9B5] !border !border-solid m-0 !h-[54px] !min-h-0 [&>*]:!m-0 !rounded-t [&>div]:!justify-between [&>div]:!items-center"
           expandIcon={<Image src={ChevronDownIcon} alt="Seta" />}
           aria-controls="panel1-content"
           id="panel1-header"
@@ -81,7 +80,7 @@ const CustomerForm = () => {
           <span>Representante Legal</span>
           <FormWarning className="pr-6" />
         </AccordionSummary>
-        <AccordionDetails className="rounded-b px-4 pb-[37px] pt-8">
+        <AccordionDetails className="!rounded-b !px-4 !pb-[37px] !pt-8">
           <div className="flex gap-[23px]">
             <TextField
               label="Nome Completo*"

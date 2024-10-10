@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
 import PlusSquareIcon from "@/assets/icons/plus-square.svg";
-import { textFieldSx } from "@/utils";
+import { textFieldSx } from "@/utils/textFieldStyles";
 
 const Contact = () => {
   return (
@@ -31,7 +31,7 @@ const Contact = () => {
           <TextField label="E-mail" className="w-[196px]" sx={textFieldSx} />
         </div>
       </div>
-      <button className="mt-[24.5px] text-[#00B9B5] border border-[#00B9B5] rounded px-[19px] py-[8.5px] flex gap-[10px]">
+      <button type="button" className="mt-[24.5px] text-[#00B9B5] border border-[#00B9B5] rounded px-[19px] py-[8.5px] flex gap-[10px]">
         <span className="font-bold leading-[22.4px]">
           Adicionar novo contato
         </span>
