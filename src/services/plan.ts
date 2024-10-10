@@ -1,13 +1,13 @@
 import { ApiResponse } from "@/types/apiResponse";
 import api from "./api";
 
-interface Product {
+export interface Product {
   final_price: number;
   commission: number;
   plan_product_name: string;
 }
 
-interface Plan {
+export interface Plan {
   id: string;
   plan_name: string;
   products: Product[];
