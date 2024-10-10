@@ -20,8 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <header>
+      <body className={`${inter.className} antialiased relative`}>
+        <header className="sticky top-0 z-50">
           <Navbar />
         </header>
         <main>{children}</main>
