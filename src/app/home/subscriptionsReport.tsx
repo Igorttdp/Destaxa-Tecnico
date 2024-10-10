@@ -1,19 +1,15 @@
-"use client";
-
 import Image from "next/image";
 import { MenuItem, Pagination, TextField } from "@mui/material";
 
 import SearchIcon from "@/assets/icons/search.svg";
 import CalendarIcon from "@/assets/icons/calendar.svg";
-import { DataGrid } from "@mui/x-data-grid";
-import { columns } from "./subscriptionsColumns";
-
+import { SubscriptionTable } from "./subscriptionTable";
 
 const SubscriptionsReport = () => {
   return (
     <div className="mt-40">
       <div className="mb-8">
-        <h2 className="font-bold leading-[29.05px] text-2xl">
+        <h2 className="font-bold leading-[29.05px] text-2xl mb-8">
           Relatório de Assinaturas
         </h2>
 
@@ -50,27 +46,9 @@ const SubscriptionsReport = () => {
       </div>
 
       <div>
-        <DataGrid
-          rows={[]}
-          columns={columns}
-          disableRowSelectionOnClick
-          disableColumnResize
-          disableColumnSorting
-          disableColumnMenu
-          hideFooter
-          sx={{
-            ".MuiDataGrid-columnHeaderTitleContainer": {
-              justifyContent: "center",
-            },
-            ".MuiDataGrid-row--borderBottom": {
-              background: "#F8F8F8 !important",
-            },
-            ".MuiDataGrid-columnSeparator": {
-              visibility: "hidden",
-            },
-            fontSize: 12,
-          }}
-        />
+
+        <SubscriptionTable data={[]} />
+
         <div className="flex justify-between items-center mt-8">
           <TextField
             label="Quantidade de itens por página"
