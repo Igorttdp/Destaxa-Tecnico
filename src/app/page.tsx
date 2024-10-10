@@ -1,5 +1,5 @@
-import { Subscriptions } from "@/app/home/subscriptions";
-import SubscriptionsReport from "./home/subscriptionsReport";
+import { Subscriptions } from "@/app/components/subscriptions";
+import SubscriptionsReport from "./components/subscriptionsReport";
 
 export default function Home() {
   return (
