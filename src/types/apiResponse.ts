@@ -16,8 +16,6 @@ interface Sort {
   descending: boolean;
 }
 
-export type Content<T> = {};
-
 export type ApiResponse<T> = {
   pageable: Pageable;
   sort: Sort[];
@@ -29,6 +27,5 @@ export type ApiResponse<T> = {
   first: boolean;
   numberOfElements: number;
   empty: boolean;
-
-  content: Content<T>[];
+  content: T[];
 }
