@@ -20,6 +20,7 @@ interface ContextProps {
   renderForm: () => JSX.Element | undefined;
   nextStep: () => void;
   previousStep: () => void;
+  setSubscriberId: (customer_id: string) => void;
   setPlanId: (plan_id: string) => void;
   setAutomationId: (automation_id: string) => void;
   setProducts: (api_products: Product[]) => void;
@@ -59,6 +60,13 @@ const NewSubscriptionProvider = ({ children }: ProviderProps) => {
 
   const previousStep = useCallback(() => {
     dispatch({ type: SubscriptionActionKind.PREVIOUS_STEP });
+  }, []);
+
+  const setSubscriberId = useCallback((customer_id: string) => {
+    dispatch({
+      type: SubscriptionActionKind.SET_CUSTOMER_ID,
+      payload: { subscriber_id: customer_id },
+    });
   }, []);
 
   const setPlanId = useCallback((plan_id: string) => {
@@ -111,6 +119,7 @@ const NewSubscriptionProvider = ({ children }: ProviderProps) => {
         renderForm,
         nextStep,
         previousStep,
+        setSubscriberId,
         setPlanId,
         setAutomationId,
         setProducts,
