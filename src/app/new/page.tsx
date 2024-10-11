@@ -15,7 +15,7 @@ const NewSubscription = () => {
           <NewSubscriptionForm />
         </div>
 
-        <Image src={Background} alt="Imagem" />
+        <Image src={Background} alt="Imagem" width={432} height={776} />
       </div>
     </NewSubscriptionProvider>
   );
