@@ -1,5 +1,5 @@
 export interface LegalPerson {
-  name: string;
+  full_name: string;
   document_number: string;
   email: string;
 }
@@ -15,7 +15,6 @@ export interface SubscriptionContent {
   plan_name: string;
   company_name: string;
   company_document: string;
-  legal_person: LegalPerson;
 }
 
 export interface PostProductResponse {
