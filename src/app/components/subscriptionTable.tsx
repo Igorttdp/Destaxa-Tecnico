@@ -7,7 +7,7 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 
 import SubscriptionsViewModel from "../viewModel/subscriptionsViewModel";
-import { SubscriptionContent } from "@/services/subscriptions";
+import { SubscriptionContent } from "@/services/subscriptions/types";
 import PlusCircleIcon from "@/assets/icons/plus-circle.svg";
 import EditIcon from "@/assets/icons/edit.svg";
 import XCircleIcon from "@/assets/icons/x-circle.svg";
@@ -19,7 +19,10 @@ interface SubscriptionTable {
 
 export const SubscriptionTable = ({ data }: SubscriptionTable) => {
   return (
-    <TableContainer component={Paper} className="!shadow-none border border-[#F8F8F8] rounded">
+    <TableContainer
+      component={Paper}
+      className="!shadow-none border border-[#F8F8F8] rounded"
+    >
       <Table>
         <TableHead className="bg-[#F8F8F8]">
           <TableRow>
@@ -53,55 +56,63 @@ export const SubscriptionTable = ({ data }: SubscriptionTable) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((subs) => {
-            const viewModel = new SubscriptionsViewModel(subs);
+          {!!data.length ? (
+            data.map((subs) => {
+              const viewModel = new SubscriptionsViewModel(subs);
 
-            return (
-              <TableRow key={Date.now()} className="even:bg-[#F8F8F8]">
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  {viewModel.getSubscriptionDate()}
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  PED09009934
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  {subs.company_name}
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  {viewModel.getCNPJ()}
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  Mauro Couto
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  mauro@cliente.com.br
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  {viewModel.getSubscriptionDate()}
-                </TableCell>
-                <TableCell className="!text-[12px] !text-center !border-0">
-                  {subs.subscription_status}
-                </TableCell>
-                <TableCell className="!flex !items-center !justify-center !gap-2 !border-0">
-                  <Image
-                    src={PlusCircleIcon}
-                    alt="Adicionar"
-                    className="cursor-pointer"
-                  />
-                  <Image
-                    src={EditIcon}
-                    alt="Editar"
-                    className="cursor-pointer"
-                  />
-                  <Image
-                    src={XCircleIcon}
-                    alt="Excluir"
-                    className="cursor-pointer"
-                  />
-                </TableCell>
-              </TableRow>
-            );
-          })}
+              return (
+                <TableRow key={subs.id} className="even:bg-[#F8F8F8]">
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    {viewModel.getSubscriptionDate()}
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    PED09009934
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    {subs.company_name}
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    {viewModel.getCNPJ()}
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    Mauro Couto
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    mauro@cliente.com.br
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    {viewModel.getSubscriptionDate()}
+                  </TableCell>
+                  <TableCell className="!text-[12px] !text-center !border-0">
+                    {subs.subscription_status}
+                  </TableCell>
+                  <TableCell className="!flex !items-center !justify-center !gap-2 !border-0">
+                    <Image
+                      src={PlusCircleIcon}
+                      alt="Adicionar"
+                      className="cursor-pointer"
+                    />
+                    <Image
+                      src={EditIcon}
+                      alt="Editar"
+                      className="cursor-pointer"
+                    />
+                    <Image
+                      src={XCircleIcon}
+                      alt="Excluir"
+                      className="cursor-pointer"
+                    />
+                  </TableCell>
+                </TableRow>
+              );
+            })
+          ) : (
+            <TableRow>
+              <TableCell colSpan={9} align="center" className="!py-10 !border-b-0 !text-neutral-500">
+                Sem dados disponíveis.
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>
