@@ -6,7 +6,7 @@ const NewSubscriptionForm = () => {
   const {
     renderForm,
     previousStep,
-    state: { step },
+    state: { step, data },
   } = useNewSubscriptionProvider();
 
   return (
@@ -31,9 +31,9 @@ const NewSubscriptionForm = () => {
         <button
           form="form"
           className="bg-[#00B9B5] text-white font-bold leading-[22.4px] py-[10px] w-[216px] rounded disabled:opacity-50 "
-          disabled={step === 1}
+          disabled={step === 1 && !data.products.length}
         >
-          Continuar
+          {step === 1 ? "Enviar" : "Continuar"}
         </button>
       </div>
     </div>
