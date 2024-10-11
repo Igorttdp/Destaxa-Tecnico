@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 
+import { useForm, Controller } from "react-hook-form";
+
 import TextField from "@mui/material/TextField";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -19,14 +21,34 @@ import Address from "./address";
 const CustomerForm = () => {
   const { nextStep } = useNewSubscriptionProvider();
 
+  const { control } = useForm();
+
   return (
     <form id="form" onSubmit={nextStep}>
       <div className="flex gap-[9.79px]">
-        <TextField label="CNPJ*" className="w-[236.61px]" sx={textFieldSx} />
-        <TextField
-          label="Nome Fantasia"
-          className="w-[430px]"
-          sx={textFieldSx}
+        <Controller
+          control={control}
+          name="cnpj"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="CNPJ*"
+              className="w-[236.61px]"
+              sx={textFieldSx}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="cnpj"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Nome Fantasia"
+              className="w-[430px]"
+              sx={textFieldSx}
+            />
+          )}
         />
       </div>
 
