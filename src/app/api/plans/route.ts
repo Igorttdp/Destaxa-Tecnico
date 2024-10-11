@@ -1,4 +1,4 @@
-import { getPlans } from "@/services/plan";
+import { getPlans } from "@/services/plans";
 import { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 
@@ -8,9 +8,6 @@ export async function GET() {
     return Response.json(res);
   } catch (err) {
     const error = err as AxiosError;
-    return NextResponse.json(
-      { ...error },
-      { status: Number(error.code) || 500 }
-    );
+    return NextResponse.json(error, { status: Number(error.status) || 500 });
   }
 }
