@@ -6,10 +6,10 @@ import { MenuItem, Pagination, TextField } from "@mui/material";
 import SearchIcon from "@/assets/icons/search.svg";
 import CalendarIcon from "@/assets/icons/calendar.svg";
 import { SubscriptionTable } from "./subscriptionTable";
-import { SubscriptionContent } from "@/services/subscriptions";
+import { SubscriptionsData } from "../utils/getData";
 
 interface SubscriptionsReportProps {
-  data: SubscriptionContent[];
+  data: SubscriptionsData[];
 }
 
 const SubscriptionsReport = ({ data }: SubscriptionsReportProps) => {

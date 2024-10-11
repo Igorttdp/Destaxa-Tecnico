@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -7,14 +9,13 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 
 import SubscriptionsViewModel from "../viewModel/subscriptionsViewModel";
-import { SubscriptionContent } from "@/services/subscriptions/types";
 import PlusCircleIcon from "@/assets/icons/plus-circle.svg";
 import EditIcon from "@/assets/icons/edit.svg";
 import XCircleIcon from "@/assets/icons/x-circle.svg";
-import Image from "next/image";
+import { SubscriptionsData } from "../utils/getData";
 
 interface SubscriptionTable {
-  data: SubscriptionContent[];
+  data: SubscriptionsData[];
 }
 
 export const SubscriptionTable = ({ data }: SubscriptionTable) => {
@@ -66,7 +67,7 @@ export const SubscriptionTable = ({ data }: SubscriptionTable) => {
                     {viewModel.getSubscriptionDate()}
                   </TableCell>
                   <TableCell className="!text-[12px] !text-center !border-0">
-                    PED09009934
+                    {subs.plan_name}
                   </TableCell>
                   <TableCell className="!text-[12px] !text-center !border-0">
                     {subs.company_name}
@@ -75,10 +76,10 @@ export const SubscriptionTable = ({ data }: SubscriptionTable) => {
                     {viewModel.getCNPJ()}
                   </TableCell>
                   <TableCell className="!text-[12px] !text-center !border-0">
-                    Mauro Couto
+                    {viewModel.getContactName()}
                   </TableCell>
                   <TableCell className="!text-[12px] !text-center !border-0">
-                    mauro@cliente.com.br
+                    {viewModel.getContactEmail()}
                   </TableCell>
                   <TableCell className="!text-[12px] !text-center !border-0">
                     {viewModel.getSubscriptionDate()}

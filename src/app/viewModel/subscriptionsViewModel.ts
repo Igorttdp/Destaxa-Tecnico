@@ -1,7 +1,7 @@
-import { SubscriptionContent } from "@/services/subscriptions";
+import { SubscriptionsData } from "../utils/getData";
 
 class SubscriptionsViewModel {
-  constructor(data: SubscriptionContent) {
+  constructor(data: SubscriptionsData) {
     this.data = data;
   }
 
@@ -21,6 +21,22 @@ class SubscriptionsViewModel {
       8,
       12
     )}-${cnpjNumeros.slice(12)}`;
+  }
+
+  public getContactName() {
+    if (!this.data.contact.length) {
+      return "--";
+    }
+
+    return this.data.contact[0].contact_name;
+  }
+
+  public getContactEmail() {
+    if (!this.data.contact.length) {
+      return "--";
+    }
+
+    return this.data.contact[0].email;
   }
 }
 
