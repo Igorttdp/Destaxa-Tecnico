@@ -8,7 +8,7 @@ import NewSubscriptionForm from "./form";
 const NewSubscription = () => {
   return (
     <NewSubscriptionProvider>
-      <div className="grid grid-cols-[680px,_432px] gap-[83px] justify-center my-[55px]">
+      <div className="grid grid-cols-[697px,_432px] gap-[83px] justify-center my-[55px]">
         <div>
           <Header />
           <Stepper />
