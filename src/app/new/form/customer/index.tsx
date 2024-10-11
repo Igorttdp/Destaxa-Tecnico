@@ -22,6 +22,7 @@ import Address from "./address";
 import LegalPerson from "./legalPerson";
 import useCustomer from "./hook/useCustomer";
 import { useState } from "react";
+import Loader from "@/components/loader";
 
 export const initialContactValues = {
   contact_name: "",
@@ -49,11 +50,14 @@ const initialLegalPersonValues = {
 };
 
 const CustomerForm = () => {
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [isSnackbarErrorOpen, setIsSnackbarErrorOpen] = useState(false);
 
-  const toggleSnackbar = () => setIsSnackbarOpen(!isSnackbarOpen);
+  const toggleSnackbarError = () =>
+    setIsSnackbarErrorOpen(!isSnackbarErrorOpen);
 
-  const { createCustomerMutate } = useCustomer({ toggleSnackbar });
+  const { createCustomerMutate, isPending } = useCustomer({
+    toggleSnackbarError,
+  });
 
   const form = useForm<FormType>({
     resolver: yupResolver(schema),
@@ -70,21 +74,30 @@ const CustomerForm = () => {
 
   return (
     <>
+      <Loader
+        className={
+          isPending
+            ? "flex fixed top-0 left-0 bg-black/20 z-50 [&>span]:font-bold"
+            : "hidden"
+        }
+      />
+
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isSnackbarOpen}
-        onClose={toggleSnackbar}
+        open={isSnackbarErrorOpen}
+        onClose={toggleSnackbarError}
         autoHideDuration={6000}
       >
         <Alert
-          onClose={toggleSnackbar}
+          onClose={toggleSnackbarError}
           severity="error"
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Ocorreu um erro ao enviar a requisição. Tente novamente.
+          Ocorreu um erro. Tente novamente.
         </Alert>
       </Snackbar>
+
       <form id="form" onSubmit={form.handleSubmit(handleFormSubmit)}>
         <div className="flex gap-[9.79px]">
           <TextField

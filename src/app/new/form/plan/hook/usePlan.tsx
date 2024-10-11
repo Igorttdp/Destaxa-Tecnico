@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
-
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 import { Plan } from "@/services/plans/types";
 import { localApi } from "@/services/api";
@@ -8,12 +7,15 @@ import { ApiResponse } from "@/types/apiResponse";
 import { Automation } from "@/services/automations/types";
 import { NewSubscriptionData } from "@/app/new/reducer";
 
-interface UsePĺanProps {
+interface UsePlanProps {
   toggleSnackbarError: () => void;
   toggleSnackbarSuccess: () => void;
 }
 
-const usePlan = ({ toggleSnackbarError }: UsePĺanProps) => {
+const usePlan = ({
+  toggleSnackbarError,
+  toggleSnackbarSuccess,
+}: UsePlanProps) => {
   const router = useRouter();
 
   const { data } = useQuery({
@@ -26,12 +28,13 @@ const usePlan = ({ toggleSnackbarError }: UsePĺanProps) => {
     queryFn: () => localApi.get<Automation[]>("/automations"),
   });
 
-  const { mutateAsync: createSubscriptionMutate } = useMutation({
+  const { mutateAsync: createSubscriptionMutate, isPending } = useMutation({
     mutationKey: ["createSubscription"],
     mutationFn: (data: NewSubscriptionData) =>
       localApi.post("/subscriptions", data),
     onSuccess: () => {
-      setTimeout(() => router.push("/"), 6000);
+      toggleSnackbarSuccess();
+      setTimeout(() => router.push("/"), 4000);
     },
     onError: () => {
       toggleSnackbarError();
@@ -42,6 +45,7 @@ const usePlan = ({ toggleSnackbarError }: UsePĺanProps) => {
     data: data?.data.content || [],
     automationsData: automationsData?.data || [],
     createSubscriptionMutate,
+    isPending,
   };
 };
 

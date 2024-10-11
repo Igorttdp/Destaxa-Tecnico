@@ -11,6 +11,7 @@ import usePlan from "./hook/usePlan";
 import PlanItems from "./items";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import Loader from "@/components/loader";
 
 const Plan = () => {
   const [isSnackbarErrorOpen, setIsSnackbarErrorOpen] = useState(false);
@@ -33,7 +34,11 @@ const Plan = () => {
     data: plansData,
     automationsData,
     createSubscriptionMutate,
-  } = usePlan({ toggleSnackbarError, toggleSnackbarSuccess });
+    isPending,
+  } = usePlan({
+    toggleSnackbarError,
+    toggleSnackbarSuccess,
+  });
 
   const renderAccordion = useCallback(() => {
     if (plansData.length === 0) {
@@ -84,10 +89,27 @@ const Plan = () => {
     if (!!automationsData.length && !data.automation_id) {
       setAutomationId(automationsData[0].id);
     }
-  }, [plansData, automationsData]);
+  }, [
+    plansData,
+    automationsData,
+    data.plan_id,
+    data.products.length,
+    data.automation_id,
+    setPlanId,
+    setProducts,
+    setAutomationId,
+  ]);
 
   return (
     <>
+      <Loader
+        className={
+          isPending
+            ? "flex fixed top-0 left-0 bg-black/20 z-50 [&>span]:font-bold"
+            : "hidden"
+        }
+      />
+
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={isSnackbarErrorOpen}
@@ -106,7 +128,7 @@ const Plan = () => {
 
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isSnackbarErrorOpen}
+        open={isSnackbarSuccessOpen}
         onClose={toggleSnackbarSuccess}
         autoHideDuration={6000}
       >

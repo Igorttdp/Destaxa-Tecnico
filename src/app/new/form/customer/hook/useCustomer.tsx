@@ -7,13 +7,15 @@ import { PostApiRepost } from "@/types/apiResponse";
 import { FormType as CreateCustomerData } from "../../schemas/customer";
 
 interface UseCustomerProps {
-  toggleSnackbar: () => void;
+  toggleSnackbarError: () => void;
 }
 
-const useCustomer = ({ toggleSnackbar }: UseCustomerProps) => {
+const useCustomer = ({
+  toggleSnackbarError,
+}: UseCustomerProps) => {
   const { nextStep, setSubscriberId } = useNewSubscriptionProvider();
 
-  const { mutateAsync: createCustomerMutate } = useMutation({
+  const { mutateAsync: createCustomerMutate, isPending } = useMutation({
     mutationKey: ["createCustomer"],
     mutationFn: (data: CreateCustomerData) =>
       localApi.post<PostApiRepost<CreateCustomerResponse>>("/customer", data),
@@ -22,11 +24,11 @@ const useCustomer = ({ toggleSnackbar }: UseCustomerProps) => {
       nextStep();
     },
     onError: () => {
-      toggleSnackbar();
+      toggleSnackbarError();
     },
   });
 
-  return { createCustomerMutate };
+  return { createCustomerMutate, isPending };
 };
 
 export default useCustomer;
