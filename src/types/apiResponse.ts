@@ -28,4 +28,8 @@ export type ApiResponse<T> = {
   numberOfElements: number;
   empty: boolean;
   content: T[];
-}
+};
+
+export type PostApiRepost<T> = {
+  result: T;
+};
