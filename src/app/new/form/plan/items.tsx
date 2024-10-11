@@ -11,8 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { textFieldSx } from "@/utils/textFieldStyles";
 
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
-import { Plan } from "@/services/plan";
+import { Plan } from "@/services/plans/types";
 import Products from "./products";
+import useNewSubscriptionProvider from "../../context/useNewSubscriptionProvider";
 
 interface PlanItemsProps {
   plan: Plan;
@@ -24,14 +25,20 @@ const intl = new Intl.NumberFormat("pt-BR", {
 });
 
 const PlanItems = ({ plan }: PlanItemsProps) => {
+  const {
+    state: {
+      data: { products },
+    },
+  } = useNewSubscriptionProvider();
+
   const comissions = useMemo(
-    () => plan.products.reduce((acc, cv) => acc + cv.commission, 0),
-    [plan.products]
+    () => products.reduce((acc, cv) => acc + cv.commission, 0),
+    [products]
   );
 
   const total = useMemo(
-    () => plan.products.reduce((acc, cv) => acc + cv.final_price, 0),
-    [plan.products]
+    () => products.reduce((acc, cv) => acc + cv.final_price, 0),
+    [products]
   );
 
   return (
@@ -47,7 +54,7 @@ const PlanItems = ({ plan }: PlanItemsProps) => {
       >
         <span>{plan.plan_name}</span>
       </AccordionSummary>
-      <AccordionDetails className="!rounded-b !px-4 !pt-[23px]">
+      <AccordionDetails className="!rounded-b !pr-[18px] !pl-5 !pt-[23px]">
         <div className="flex gap-[14.84px] items-center">
           <TextField
             label="Selecionar funcionalidade"
@@ -64,7 +71,7 @@ const PlanItems = ({ plan }: PlanItemsProps) => {
           </button>
         </div>
 
-        <Products data={plan.products} />
+        <Products />
 
         <div className="flex justify-end gap-6 mt-6">
           <div className="flex items-center gap-2">
