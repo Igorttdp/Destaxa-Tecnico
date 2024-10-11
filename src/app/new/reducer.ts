@@ -42,6 +42,7 @@ export interface NewSubscriptionData {
 }
 
 interface PayloadProps {
+  subscriber_id: string;
   automation_id: string;
   plan_id: string;
   product_id: string;
@@ -51,6 +52,7 @@ interface PayloadProps {
 export enum SubscriptionActionKind {
   NEXT_STEP,
   PREVIOUS_STEP,
+  SET_CUSTOMER_ID,
   SET_PLAN,
   SET_PRODUCTS,
   SET_AUTOMATION,
@@ -85,6 +87,14 @@ export const subscriptionReducer = (
         ...state,
         step: state.step - 1,
       };
+    case SubscriptionActionKind.SET_CUSTOMER_ID:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          subscriber_id: payload!.subscriber_id ?? ""
+        }
+      }
     case SubscriptionActionKind.SET_PLAN:
       return {
         ...state,
