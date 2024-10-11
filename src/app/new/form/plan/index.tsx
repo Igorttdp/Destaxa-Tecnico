@@ -1,17 +1,27 @@
 "use client";
 
-import { FormEvent, FormEventHandler, useCallback, useEffect } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
 import { textFieldSx } from "@/utils/textFieldStyles";
+import useNewSubscriptionProvider from "../../context/useNewSubscriptionProvider";
 import usePlan from "./hook/usePlan";
 import PlanItems from "./items";
-import useNewSubscriptionProvider from "../../context/useNewSubscriptionProvider";
-import useNewSubscriptionForm from "../hook/useNewSubscriptionForm";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const Plan = () => {
+  const [isSnackbarErrorOpen, setIsSnackbarErrorOpen] = useState(false);
+  const [isSnackbarSuccessOpen, setIsSnackbarSuccessOpen] = useState(false);
+
+  const toggleSnackbarError = () =>
+    setIsSnackbarErrorOpen(!isSnackbarErrorOpen);
+
+  const toggleSnackbarSuccess = () =>
+    setIsSnackbarSuccessOpen(!isSnackbarSuccessOpen);
+
   const {
     setPlanId,
     setAutomationId,
@@ -19,9 +29,11 @@ const Plan = () => {
     state: { data },
   } = useNewSubscriptionProvider();
 
-  const { data: plansData, automationsData } = usePlan();
-  
-  const { createSubscriptionMutate } = useNewSubscriptionForm();
+  const {
+    data: plansData,
+    automationsData,
+    createSubscriptionMutate,
+  } = usePlan({ toggleSnackbarError, toggleSnackbarSuccess });
 
   const renderAccordion = useCallback(() => {
     if (plansData.length === 0) {
@@ -75,15 +87,49 @@ const Plan = () => {
   }, [plansData, automationsData]);
 
   return (
-    <form id="form" onSubmit={handleSubmit}>
-      {renderAccordion()}
+    <>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isSnackbarErrorOpen}
+        onClose={toggleSnackbarError}
+        autoHideDuration={6000}
+      >
+        <Alert
+          onClose={toggleSnackbarError}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Ocorreu um erro. Tente novamente.
+        </Alert>
+      </Snackbar>
 
-      <p className="leading-[22.4px] mt-8 mb-6">
-        Selecione a automação desejada para este cliente:
-      </p>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isSnackbarErrorOpen}
+        onClose={toggleSnackbarSuccess}
+        autoHideDuration={6000}
+      >
+        <Alert
+          onClose={toggleSnackbarSuccess}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Assinatura criada com sucesso! Redirecionando para tela principal...
+        </Alert>
+      </Snackbar>
 
-      {renderTextField()}
-    </form>
+      <form id="form" onSubmit={handleSubmit}>
+        {renderAccordion()}
+
+        <p className="leading-[22.4px] mt-8 mb-6">
+          Selecione a automação desejada para este cliente:
+        </p>
+
+        {renderTextField()}
+      </form>
+    </>
   );
 };
 
