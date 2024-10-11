@@ -30,7 +30,7 @@ export interface PostSubscriptionResponse {
   billing_day: number;
   end_date: string;
   start_date: string;
-  income: {};
+  income: object;
   number: number;
   status: string;
 }
