@@ -12,7 +12,12 @@ export const Stepper = () => {
   } = useNewSubscriptionProvider();
 
   return (
-    <div className={cn("pl-6 flex items-center gap-2 mb-[79px]", step === 1 && "mb-10")}>
+    <div
+      className={cn(
+        "pl-6 flex items-center gap-2 mb-[79px]",
+        step === 1 && "mb-10"
+      )}
+    >
       <div
         className={cn(
           "p-4 flex flex-col justify-center items-center gap-2",
@@ -20,7 +25,7 @@ export const Stepper = () => {
         )}
       >
         <Image src={Icon} alt="Icone" />
-        <span className="text-center">
+        <span className="text-center text-xs leading-[14.52px]">
           Dados <br /> do cliente
         </span>
       </div>
@@ -34,8 +39,8 @@ export const Stepper = () => {
         )}
       >
         <Image src={Icon} alt="Icone" />
-        <span className="text-center">
-          Dados <br /> do cliente
+        <span className="text-center text-xs leading-[14.52px]">
+          Plano de <br /> assinatura
         </span>
       </div>
 
@@ -48,8 +53,8 @@ export const Stepper = () => {
         )}
       >
         <Image src={Icon} alt="Icone" />
-        <span className="text-center">
-          Dados <br /> do cliente
+        <span className="text-center text-xs leading-[14.52px]">
+          Credenciadora <br /> e Roteamento
         </span>
       </div>
 
@@ -62,8 +67,8 @@ export const Stepper = () => {
         )}
       >
         <Image src={Icon} alt="Icone" />
-        <span className="text-center">
-          Dados <br /> do cliente
+        <span className="text-center text-xs leading-[14.52px]">
+          Pix e <br /> Conciliação
         </span>
       </div>
     </div>
